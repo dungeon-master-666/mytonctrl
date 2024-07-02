@@ -93,7 +93,7 @@ def DownloadDump(local):
 
 	local.add_log("start DownloadDump fuction", "debug")
 	url = "https://dump.ton.org"
-	dumpSize = requests.get(url + "/dumps/latest.tar.size.archive.txt").text
+	dumpSize = requests.get(url + "/dumps/latest_3m.tar.size.archive.txt").text
 	print("dumpSize:", dumpSize)
 	needSpace = int(dumpSize) * 3
 	diskSpace = psutil.disk_usage("/var")
@@ -106,7 +106,7 @@ def DownloadDump(local):
 	os.system(cmd)
 
 	# download dump
-	cmd = "curl -s {url}/dumps/latest.tar.lz | pv | plzip -d -n8 | tar -xC /var/ton-work/db".format(url=url)
+	cmd = "curl -s {url}/dumps/latest_3m.tar.lz | pv | plzip -d -n8 | tar -xC /var/ton-work/db".format(url=url)
 	os.system(cmd)
 #end define
 
